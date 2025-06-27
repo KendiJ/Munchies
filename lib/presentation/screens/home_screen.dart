@@ -7,14 +7,13 @@ enum PlayerState { idle, running }
 class HomeScreen extends Component with HasGameRef {
   SpriteComponent background = SpriteComponent();
   SpriteComponent munchie = SpriteComponent();
-  SpriteComponent arrowGo = SpriteComponent();
+  ArrowComponent arrowGo = ArrowComponent();
   final double _munchieScale = 0.14;
 
   @override
   Future<void> onLoad() async {
     super.onLoad();
     final size = gameRef.size;
-    
 
     add(
       background
@@ -25,8 +24,8 @@ class HomeScreen extends Component with HasGameRef {
     munchie
       ..sprite = await Sprite.load('munchies/MunchieGoesOut.png')
       ..anchor = Anchor.center
-      ..position = Vector2(size.x * 0.45,  size.y * 0.4)
-      ..size = Vector2(size.x * _munchieScale , size.y * _munchieScale * 2.0 );
+    ..position = Vector2(size.x * 0.45,  size.y * 0.4)
+    ..size = Vector2(size.x * _munchieScale , size.y * _munchieScale * 2.0 );
     add(munchie);
 
     arrowGo
@@ -37,12 +36,12 @@ class HomeScreen extends Component with HasGameRef {
   }
 }
 
-class ArrowGo extends SpriteComponent
+class ArrowComponent extends SpriteComponent
     with TapCallbacks, HasGameReference<AppRoutes> {
-  ArrowGo() : super(
-    size: Vector2(80, 80),
-  );
+  ArrowComponent()
+      : super(
+          size: Vector2(80, 80),
+        );
   @override
   void onTapUp(TapUpEvent event) => game.router.pushNamed('fence');
 }
-
